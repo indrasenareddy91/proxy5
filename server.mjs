@@ -52,6 +52,9 @@ app.post("/upload", async (req, res) => {
     });
 
     if (!response.ok) {
+      if (response.status === 429) {
+  console.log(Object.fromEntries(response.headers.entries()));
+}
       console.error("Download failed:", key, response.status);
       return res.status(500).json({ status: "failed", key, code: response.status });
     }
